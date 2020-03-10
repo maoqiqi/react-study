@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="example"></div>
+<div id="example1"></div>
+
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+
+<script type="text/babel">
+  class Fade extends React.Component {
+
+    state = {
+      opacity: 1,
+    }
+
+    constructor(props) {
+      super(props)
+      console.log('constructor(): 创建组件对象')
+    }
+
+    componentWillMount() {
+      console.log('componentWillMount(): 初始化将要挂载')
+    }
+
+    componentDidMount() {// 在此方法中启动定时器/绑定监听/发送ajax请求
+      console.log('componentDidMount(): 初始化已经挂载')
+      this.intervalId = setInterval(() => {
+        console.log('--------')
+        let {opacity} = this.state
+        opacity -= 0.1
+        if (opacity <= 0){
+          opacity = 1
+        }
+        this.setState({opacity})
+      }, 200)
+    }
+
+    componentWillUpdate() {
+      console.log('componentWillUpdate(): 将要更新')
+    }
+
+    componentDidUpdate() {
+      console.log('componentDidUpdate(): 已经更新')
+    }
+
+    componentWillUnmount() {// 清除定时器/解除监听
+      console.log('componentWillUnmount(): 将要被移除')
+      clearInterval(this.intervalId)
+    }
+
+    removeComponent = () => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('example'))
+    }
+
+    render() {
+      console.log('render() 渲染组件')
+      return (
+        <div>
+          <h2 style={{opacity: this.state.opacity}}>{this.props.content}</h2>
+          <button onClick={this.removeComponent}>不活了</button>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Fade content="react学不会, 怎么办?"/>, document.getElementById('example'))
+</script>
+
+</body>
+</html>

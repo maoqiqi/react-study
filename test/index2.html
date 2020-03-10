@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="example"></div>
+<div id="example1"></div>
+
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+<script src="js/prop-types.js"></script>
+
+<script type="text/babel">
+  class App extends React.Component {
+
+    state = {
+      todos: ['吃饭', '睡觉', '打豆豆'],
+    }
+
+    add = (todo) => {
+      const {todos} = this.state
+      todos.unshift(todo)
+      this.setState({todos})
+    }
+
+    render() {
+      const {todos} = this.state
+      return (
+        <div>
+          <TodoAdd add={this.add} count={todos.length}/>
+          <TodoList todos={todos}/>
+        </div>
+      )
+    }
+  }
+
+  // 添加todo组件
+  class TodoAdd extends React.Component {
+    addTodo = () => {
+      const text = this.input.value.trim()
+      if (!text) return
+      this.props.add(text)
+      this.input.value = ''
+    }
+
+    render() {
+      return (
+        <div>
+          <h2>Simple TODO List</h2>
+          <input type="text" ref={input => this.input = input}/>
+          <button onClick={this.addTodo}>Add({this.props.count})</button>
+        </div>
+      )
+    }
+  }
+
+  TodoAdd.propTypes = {
+    add: PropTypes.func.isRequired,
+    count: PropTypes.number.isRequired,
+  }
+
+  // todo列表组件
+  class TodoList extends React.Component {
+    render() {
+      const {todos} = this.props
+      return (<ul>{todos.map((todo, index) => <li key={index}>{todo}</li>)}</ul>)
+    }
+  }
+
+  TodoList.propTypes = {
+    todos: PropTypes.array.isRequired,
+  }
+
+  ReactDOM.render(<App/>, document.getElementById('example'))
+</script>
+
+<script type="text/babel">
+  class LoginForm extends React.Component {
+    state = {username: ''}
+
+    handleChange = (event) => {
+      this.setState({username: event.target.value})
+    }
+
+    handleSubmit = (event) => {
+      console.log(`准备提交的用户名为: ${this.state.username}, 密码:${this.pwdInput.value}`)
+      // 阻止事件的默认行为: 提交表单
+      event.preventDefault()
+    }
+
+    render() {
+      return (
+        <form onSubmit={this.handleSubmit} action="/test">
+          <label>
+            用户名:
+            <!--受控组件-->
+            <input type="text" value={this.state.username} onChange={this.handleChange}/>
+          </label>&nbsp;
+          <label>
+            密码:
+            <!--非受控组件-->
+            <input type="password" ref={(input) => this.pwdInput = input}/>
+          </label>&nbsp;
+          <input type="submit" value="登陆"/>
+        </form>
+      )
+    }
+  }
+
+  ReactDOM.render(<LoginForm/>, document.getElementById('example1'))
+</script>
+
+</body>
+</html>

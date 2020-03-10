@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Add React in One Minute</title>
+  </head>
+  <body>
+
+    <h2>Add React in One Minute</h2>
+    <p>This page demonstrates using React with no build tooling.</p>
+    <p>React is loaded as a script tag.</p>
+
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <div id="example3"></div>
+    <div id="example4"></div>
+    <div id="like_button_container"></div>
+    <div id="example5"></div>
+    <div id="example6"></div>
+    <div id="example7"></div>
+
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script src="js/prop-types.js"></script>
+
+    <script type="text/javascript">
+      const vDom1 = React.createElement('h2', {id: 'id1'},'I Like You!'.toLowerCase())
+      ReactDOM.render(vDom1, document.getElementById('test1'))
+    </script>
+
+    <!--必须声明babel-->
+    <script type="text/babel">
+      const vDom2 = <h2 id={'id2'}>{'I Like You!'.toUpperCase()}</h2>
+      ReactDOM.render(vDom2, document.getElementById('test2'))
+    </script>
+
+    <script type="text/babel">
+      // 数据的数组
+      const names = ['jquery', 'zeptoo', 'angular', 'react全家桶', 'vue全家桶']
+      let lis = []
+      names.forEach((name, index) => lis.push(<li key={index}>{name}</li>))
+      const ul = <ul>{lis}</ul>
+      ReactDOM.render(ul, document.getElementById('example1'))
+
+      const ul2 = <ul>{
+        names.map((name, index) => <li key={index}>{name}</li>)
+      }</ul>
+      ReactDOM.render(ul2, document.getElementById('example2'))
+    </script>
+
+    <script type="text/babel">
+      // 定义组件
+      function MyComponent1() {
+        return <h2>工厂函数组件(简单组件)</h2>
+      }
+
+      class MyComponent2 extends React.Component {
+        render() {
+          return <h2>ES6类组件(复杂组件)</h2>
+        }
+      }
+
+      ReactDOM.render(<MyComponent1 />, document.getElementById('example3'))
+      ReactDOM.render(<MyComponent2 />, document.getElementById('example4'))
+    </script>
+
+    <script type="text/babel">
+      class LikeButton extends React.Component {
+
+        state = {liked: false}
+
+        handleOnclick = () => {
+          this.setState({liked: true})
+        }
+        render() {
+          if (this.state.liked) {
+            return 'You liked this.'
+          }
+
+          return <button onClick={this.handleOnclick}>Like</button>
+        }
+      }
+      ReactDOM.render(<LikeButton/>, document.getElementById('like_button_container'))
+    </script>
+
+    <script type="text/babel">
+      class Person extends React.Component {
+        render() {
+          return (
+            <ul>
+              <li>姓名: {this.props.name}</li>
+              <li>性别: {this.props.sex}</li>
+              <li>年龄: {this.props.age}</li>
+            </ul>
+          )
+        }
+      }
+
+      // 对标签属性进行限制 // 需要引入库
+      Person.protoType = {
+        name: PropTypes.string.isRequired,
+        sex: PropTypes.string,
+        age: PropTypes.number,
+      }
+
+      // 指定属性的默认值
+      Person.defaultProps = {
+        sex: '男',
+        age: 18,
+      }
+
+      const p1 = {myName: 'JACK', age: 15}
+      ReactDOM.render(<Person name={p1.myName} age={p1.age}/>, document.getElementById('example5'))
+
+      const p2 = {name: 'Tom', sex: '女', age: 20}
+      ReactDOM.render(<Person {...p2}/>, document.getElementById('example6'))
+    </script>
+
+    <script type="text/babel">
+      //定义组件
+      class InputComponent extends React.Component {
+
+        constructor(props) {
+          super(props)
+          // console.log(this)
+          // 将自定义的函数强制绑定为组件对象
+          this.handleClick = this.handleClick.bind(this) // 将返回函数中的this强制绑定为指定的对象, 并没有改变原来的函数中的this
+        }
+
+        // 自定义的方法中的this默认为null
+        handleClick() {
+          // console.log(this)// this默认是undefined, 而不是组件对象
+          // 得到绑定在当前组件对象上的input的值
+          console.log(this.msgInput.value)
+        }
+
+        handleBlur(event) {
+          console.log(event.target.value)
+        }
+
+        render() {
+          return (
+            <div>
+              <input type="text" ref={input => this.msgInput = input}/>&nbsp;
+              <button onClick={this.handleClick}>提示输入数据</button>
+              &nbsp;
+              <input type="text" placeholder="失去焦点提示数据" onBlur={this.handleBlur}/>
+            </div>
+          )
+        }
+      }
+      // 渲染组件标签
+      ReactDOM.render(<InputComponent />, document.getElementById('example7'))
+    </script>
+  </body>
+</html>
