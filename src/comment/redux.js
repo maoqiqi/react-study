@@ -36,7 +36,7 @@ export const increment = number => ({type: INCREMENT, number})
 export const decrement = number => ({type: DECREMENT, number})
 
 // reducers 根据老的state和指定action,处理返回一个新的state
-function comments(state = [], action) {
+function commentsReducer(state = [], action) {
   switch (action.type) {
     case ADD_COMMENT:
       return [...state, action.data]
@@ -49,7 +49,7 @@ function comments(state = [], action) {
   }
 }
 //
-function counter(state = 0, action) {
+function counterReducer(state = 0, action) {
   switch (action.type) {
     case INCREMENT:
       return state + action.number
@@ -60,4 +60,4 @@ function counter(state = 0, action) {
   }
 }
 
-export default combineReducers({comments, counter})
+export default combineReducers({commentsReducer, counterReducer})

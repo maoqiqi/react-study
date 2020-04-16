@@ -20,4 +20,4 @@ List2.propTypes = {
   data: PropTypes.array.isRequired,
 }
 
-export default connect(state => ({data: state.comments}))(List2)
+export default connect(state => ({data: state.commentsReducer}))(List2)

@@ -1,41 +1,42 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import * as actions from './redux'
+// 引入action函数
+import {decrement, increment} from './redux'
+// 引入连接函数
+import {connect} from 'react-redux'
 
-export default class Count extends Component {
+class Count extends Component {
 
   inputRef = React.createRef()
 
   increment = () => {
     const num = this.inputRef.current.value * 1
-    this.props.store.dispatch(actions.increment(num))
+    this.props.increment(num)
   }
 
   decrement = () => {
     const num = this.inputRef.current.value * 1
-    this.props.store.dispatch(actions.decrement(num))
+    this.props.decrement(num)
   }
 
   incrementIfOdd = () => {
     const num = this.inputRef.current.value * 1
-    let count = this.props.store.getState().counter
+    let count = this.props.count
     if (count % 2 === 1) {
-      this.props.store.dispatch(actions.increment(num))
+      this.props.increment(num)
     }
   }
 
   incrementAsync = () => {
     const num = this.inputRef.current.value * 1
     setTimeout(() => {
-      this.props.store.dispatch(actions.increment(num))
+      this.props.increment(num)
     }, 1000)
   }
 
   render() {
     return (
       <div className='count'>
-        <strong style={{fontSize: 20}}>累计 {' ' + this.props.store.getState().counter + ' 次 '}</strong>
-        <p>click {} times {' '}</p>
+        <strong style={{fontSize: 20}}>累计 {' ' + this.props.count + ' 次 '}</strong>
         <select ref={this.inputRef}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -50,6 +51,4 @@ export default class Count extends Component {
   }
 }
 
-Count.propTypes = {
-  store: PropTypes.object.isRequired,
-}
+export default connect(state => ({count: state.counterReducer}), {increment, decrement})(Count)
