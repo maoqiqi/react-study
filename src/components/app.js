@@ -6,7 +6,13 @@ import Users from './users'
 import UsersComponent from './users2'
 import CountComponent from './count'
 
-export default class App extends React.Component {
+import {connect} from 'react-redux'
+import CommentAdd from './add2'
+import CommentList from './list2'
+import {getComments} from './redux'
+import Count from './count2'
+
+class App extends React.Component {
 
   state = {
     data: [
@@ -43,14 +49,19 @@ export default class App extends React.Component {
   //   }, 1000)
   // }
 
+  componentDidMount() {
+    // 模拟异步获取数据
+    this.props.getComments()
+  }
+
   delete = index => {
-    let data = this.state.data
+    const data = this.state.data
     data.splice(index, 1)
     this.setState({data})
   }
 
   add = item => {
-    let data = this.state.data
+    const data = this.state.data
     data.unshift(item)
     this.setState({data})
   }
@@ -60,16 +71,31 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('app render')
     return (
       <div>
-        <h3>请发表对React的评论</h3>
-        <List data={this.state.data} delete={this.delete}/>
-        <Add add={this.add}/>
-        <Search refreshName={this.refreshName}/>
-        <Users searchName={this.state.searchName}/>
-        <UsersComponent searchName={this.state.searchName}/>
-        <CountComponent/>
+        <div className='group'>
+          <h3>请发表对React的评论</h3>
+          <List data={this.state.data} delete={this.delete}/>
+          <Add add={this.add}/>
+          <CountComponent/>
+        </div>
+
+        <div className='group'>
+          <h3>请发表对React的评论</h3>
+          <CommentList/>
+          <CommentAdd/>
+          <Count/>
+        </div>
+
+        <div className='group'>
+          <Search refreshName={this.refreshName}/>
+          <Users searchName={this.state.searchName}/>
+          <UsersComponent searchName={this.state.searchName}/>
+        </div>
       </div>
     )
   }
 }
+
+export default connect(null, {getComments})(App)

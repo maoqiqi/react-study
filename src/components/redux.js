@@ -48,7 +48,7 @@ export const incrementAsync = number => {
 function commentsReducer(state = [], action) {
   switch (action.type) {
     case ADD_COMMENT:
-      return [...state, action.data]
+      return [action.data, ...state]
     case DELETE_COMMENT:
       return state.filter((c, index) => index !== action.data)
     case RECEIVE_COMMENTS:

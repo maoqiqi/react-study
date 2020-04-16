@@ -1,7 +1,6 @@
-.user img {
-    width: 50px;
-    border-radius: 50px;
-    margin-top: 10px;
+.group {
+    padding: 0 20px 20px;
+    border: 1px solid orange;
 }
 
 .clear_fix {
@@ -15,22 +14,29 @@
 }
 
 /*评论*/
-.line:nth-child(odd) {
+.comment:nth-child(odd) {
     border-bottom: 1px solid red;
 }
 
-.line:nth-child(even) {
+.comment:nth-child(even) {
     border-bottom: 1px solid blue;
 }
 
-.line > button {
+.comment > button {
     float: right;
+}
+
+/*count*/
+.count {
+    border: 1px solid gray;
+    margin-top: 50px;
+    padding: 8px;
 }
 
 /*search*/
 .search {
     background: lightgray;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 8px;
 }
 
@@ -52,9 +58,8 @@
     border: 1px solid lightblue;
 }
 
-/*count*/
-.count {
-    border: 1px solid gray;
-    margin-top: 50px;
-    padding: 8px;
+.user img {
+    width: 50px;
+    border-radius: 50px;
+    margin-top: 10px;
 }

@@ -4,7 +4,7 @@ import {decrement, increment, incrementAsync} from './redux'
 // 引入连接函数
 import {connect} from 'react-redux'
 
-class Count extends Component {
+class Count2 extends Component {
 
   inputRef = React.createRef()
 
@@ -48,4 +48,4 @@ class Count extends Component {
   }
 }
 
-export default connect(state => ({count: state.counterReducer}), {increment, decrement, incrementAsync})(Count)
+export default connect(state => ({count: state.counterReducer}), {increment, decrement, incrementAsync})(Count2)

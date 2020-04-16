@@ -14,7 +14,7 @@ const Item2 = props => {
   }
 
   return (
-    <div className='line clear_fix'>
+    <div className='comment clear_fix'>
       <p>{props.item.username}说:{props.item.content}</p>
       <button onClick={del}>删除</button>
     </div>

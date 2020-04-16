@@ -9,7 +9,6 @@ const Users = props => {
     users: null,
     error: '',
   })
-  console.log(data)
 
   useEffect(() => {
     (async () => {

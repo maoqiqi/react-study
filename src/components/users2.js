@@ -16,7 +16,8 @@ export default class UsersComponent extends Component {
   }
 
   async UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log('UsersComponent==>UNSAFE_componentWillReceiveProps', nextProps.searchName)
+    if (!nextProps.searchName) return
+    
     const url = `https://api.github.com/search/users?q=${nextProps.searchName}`
 
     this.setState({firstView: false, loading: true})
