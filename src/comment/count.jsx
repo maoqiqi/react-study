@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // 引入action函数
-import {decrement, increment} from './redux'
+import {decrement, increment, incrementAsync} from './redux'
 // 引入连接函数
 import {connect} from 'react-redux'
 
@@ -20,17 +20,14 @@ class Count extends Component {
 
   incrementIfOdd = () => {
     const num = this.inputRef.current.value * 1
-    let count = this.props.count
-    if (count % 2 === 1) {
+    if (this.props.count % 2 === 1) {
       this.props.increment(num)
     }
   }
 
   incrementAsync = () => {
     const num = this.inputRef.current.value * 1
-    setTimeout(() => {
-      this.props.increment(num)
-    }, 1000)
+    this.props.incrementAsync(num)
   }
 
   render() {
@@ -51,4 +48,4 @@ class Count extends Component {
   }
 }
 
-export default connect(state => ({count: state.counterReducer}), {increment, decrement})(Count)
+export default connect(state => ({count: state.counterReducer}), {increment, decrement, incrementAsync})(Count)

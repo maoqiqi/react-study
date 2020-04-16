@@ -11,7 +11,8 @@ const DECREMENT = 'decrement'
 // actions
 export const add = (comment) => ({type: ADD_COMMENT, data: comment})
 export const deleteComment = (index) => ({type: DELETE_COMMENT, data: index})
-const receiveComments = (comments) => ({type: RECEIVE_COMMENTS, data: comments})
+const receive = (comments) => ({type: RECEIVE_COMMENTS, data: comments})
+// 异步action
 export const getComments = () => {
   return dispatch => {
     setTimeout(() => {
@@ -27,13 +28,21 @@ export const getComments = () => {
           id: Date.now() + 1,
         },
       ]
-      dispatch(receiveComments(comments))
+      dispatch(receive(comments))
     }, 1000)
   }
 }
 //
 export const increment = number => ({type: INCREMENT, number})
 export const decrement = number => ({type: DECREMENT, number})
+// 异步action creator(返回一个函数)
+export const incrementAsync = number => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(increment(number))
+    }, 1000)
+  }
+}
 
 // reducers 根据老的state和指定action,处理返回一个新的state
 function commentsReducer(state = [], action) {
