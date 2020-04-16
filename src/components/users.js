@@ -44,7 +44,7 @@ const Users = props => {
       <div className='users clearfix'>
         {
           data.users && data.users.map(user => (
-            <div className="card" key={user.html_url}>
+            <div className="user" key={user.html_url}>
               <a href={user.html_url} target="_blank" rel="noopener noreferrer">
                 <img src={user.avatar_url} alt='user'/>
               </a>
