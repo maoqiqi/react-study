@@ -4,6 +4,7 @@ import Add from './add'
 import Search from './search'
 import Users from './users'
 import UsersComponent from './users2'
+import CountComponent from './count'
 
 export default class App extends React.Component {
 
@@ -65,8 +66,9 @@ export default class App extends React.Component {
         <List data={this.state.data} delete={this.delete}/>
         <Add add={this.add}/>
         <Search refreshName={this.refreshName}/>
-        {/*<Users searchName={this.state.searchName}/>*/}
+        <Users searchName={this.state.searchName}/>
         <UsersComponent searchName={this.state.searchName}/>
+        <CountComponent/>
       </div>
     )
   }
