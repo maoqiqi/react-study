@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import PropTypes from 'prop-types'
 
 const Search = props => {
+  console.log('Search==>', '===========================================')
   const searchInput = useRef(null)
   return (
     <div className='search'>

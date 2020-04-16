@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 // import App from './component/App'
 import App from './components/app'
 import './index.css'
+import App2 from './components/app2'
 
 // ReactDOM.render(<App/>, document.getElementById('root'))
 
@@ -21,3 +22,5 @@ ReactDOM.render((
     <App/>
   </Provider>
 ), document.getElementById('root'))
+
+// ReactDOM.render(<App2/>, document.getElementById('root'))

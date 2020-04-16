@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 const Item = props => {
 
+  console.log('Item==>', '===========================================')
+
   function del() {
     const username = props.item.username
     if (window.confirm(`确定删除${username}的评论吗?`)) {

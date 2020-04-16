@@ -2,6 +2,8 @@ import React, {useRef} from 'react'
 import PropTypes from 'prop-types'
 
 const Add = props => {
+  console.log('Add==>', '===========================================')
+
   const username = useRef(null)
   const content = useRef(null)
 

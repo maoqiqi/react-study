@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import CommentItem from './item2'
 
 const List2 = props => {
+  console.log('List2==>', '===========================================')
   const display = props.data.length > 0 ? 'none' : 'block'
   return (
     <div>

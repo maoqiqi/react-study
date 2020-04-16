@@ -6,6 +6,8 @@ import {deleteComment} from './redux'
 
 const Item2 = props => {
 
+  console.log('Item2==>', '===========================================')
+
   function del() {
     const username = props.item.username
     if (window.confirm(`确定删除${username}的评论吗?`)) {

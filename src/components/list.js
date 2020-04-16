@@ -3,6 +3,7 @@ import Item from './item'
 import PropTypes from 'prop-types'
 
 const List = props => {
+  console.log('List==>', '===========================================')
   const display = props.data.length > 0 ? 'none' : 'block'
   return (
     <div>

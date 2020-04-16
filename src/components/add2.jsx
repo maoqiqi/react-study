@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {add} from './redux'
 
 const Add2 = props => {
+  console.log('Add2==>', '===========================================')
+
   const username = useRef(null)
   const content = useRef(null)
 
