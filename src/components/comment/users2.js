@@ -17,27 +17,21 @@ export default class UsersComponent extends Component {
 
   async UNSAFE_componentWillReceiveProps(nextProps) {
     console.log('UsersComponent==>UNSAFE_componentWillReceiveProps', nextProps.searchName)
-    const url = `https://api.github.com/search/users?q=${nextProps.searchName}`
+    const url = `https://api.github.com/search/users1?q=${nextProps.searchName}`
 
     this.setState({firstView: false, loading: true})
 
-    // 使用axios库
-    // axios.get(url)
-    //   .then((response) => {
-    //     console.log(response)
-    //     this.setState({loading: false, users: response.data.items})
-    //   })
-    //   .catch((error) => {
-    //     // debugger
-    //     console.log('error', error.response.data.message, error.message)
-    //     this.setState({loading: false, error: error.message})
-    //   })
+    /*
+    axios.get(url)
+      .then(response => this.setState({loading: false, users: response.data.items}))
+      .catch(error => this.setState({loading: false, error: error.message}))
+    */
 
     try {
       const result = await axios.get(url)
       this.setState({loading: false, users: result.data.items})
     } catch (err) {
-      this.setState({err: err.message})
+      this.setState({loading: false, error: err.message})
     }
   }
 
@@ -52,7 +46,7 @@ export default class UsersComponent extends Component {
       return (
         <div className='users clearfix'>
           {
-            this.state.users.map((user) => (
+            this.state.users.map(user => (
               <div className="card" key={user.html_url}>
                 <a href={user.html_url} target="_blank" rel="noopener noreferrer">
                   <img src={user.avatar_url} alt='user'/>

@@ -3,41 +3,47 @@ import PropTypes from 'prop-types'
 
 const Users = props => {
   console.log('Users==>', '===========================================')
-  const [code, setCode] = useState(1)
-  console.log('Users==>code', code)
-  const [data] = useState({users: null, error: null})
+  const [data, setData] = useState({
+    firstView: true,
+    loading: false,
+    users: null,
+    error: '',
+  })
+  console.log(data)
 
   useEffect(() => {
     (async () => {
       if (!props.searchName) return
 
-      setCode(2)
+      setData({firstView: false, loading: true, users: null, error: ''})
+
       const url = `https://api.github.com/search/users?q=${props.searchName}`
 
       try {
-        const res = await fetch(url)
-        const result = await res.json()
-        console.log(result)
-        data.users = result.items
-        setCode(4)
+        const resp = await fetch(url)
+        if (resp.status === 200) {
+          const result = await resp.json()
+          setData({firstView: false, loading: false, users: result.items, error: ''})
+        } else {
+          setData({firstView: false, loading: false, users: null, error: resp.statusText})
+        }
       } catch (err) {
-        data.error = err.message
-        setCode(3)
+        setData({firstView: false, loading: false, users: null, error: err.message})
       }
     })()
-  }, [props.searchName, data])
+  }, [props.searchName])
 
-  if (code === 1) {
+  if (data.firstView) {
     return <h2>Enter name to search</h2>
-  } else if (code === 2) {
+  } else if (data.loading) {
     return <h2>Loading result...</h2>
-  } else if (code === 3) {
+  } else if (data.error) {
     return <h2>{data.error}</h2>
   } else {
     return (
       <div className='users clearfix'>
         {
-          data.users.map(user => (
+          data.users && data.users.map(user => (
             <div className="card" key={user.html_url}>
               <a href={user.html_url} target="_blank" rel="noopener noreferrer">
                 <img src={user.avatar_url} alt='user'/>

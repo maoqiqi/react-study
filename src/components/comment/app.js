@@ -65,7 +65,7 @@ export default class App extends React.Component {
         <List data={this.state.data} delete={this.delete}/>
         <Add add={this.add}/>
         <Search refreshName={this.refreshName}/>
-        <Users searchName={this.state.searchName}/>
+        {/*<Users searchName={this.state.searchName}/>*/}
         <UsersComponent searchName={this.state.searchName}/>
       </div>
     )
