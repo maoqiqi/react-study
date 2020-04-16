@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {add} from '../redux/actions'
+import {add} from './redux'
 
 const Add2 = props => {
   const username = useRef(null)

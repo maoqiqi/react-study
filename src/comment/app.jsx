@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CommentAdd from './add2'
 import CommentList from './list2'
-import {getComments} from '../redux/actions'
+import {getComments} from './redux'
 
 class App extends React.Component {
 
