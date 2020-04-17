@@ -11,6 +11,8 @@ import CommentAdd from './add2'
 import CommentList from './list2'
 import {getComments} from './redux'
 import Count from './count2'
+import {BrowserRouter} from 'react-router-dom'
+import Router from './router'
 
 class App extends React.Component {
 
@@ -92,6 +94,14 @@ class App extends React.Component {
           <Search refreshName={this.refreshName}/>
           <Users searchName={this.state.searchName}/>
           <UsersComponent searchName={this.state.searchName}/>
+        </div>
+
+        {/* BrowserRouter:http://localhost:3000/home/news*/}
+        {/* HashRouter:http://localhost:3000/#/home/news*/}
+        <div className='group'>
+          <BrowserRouter>
+            <Router/>
+          </BrowserRouter>
         </div>
       </div>
     )
