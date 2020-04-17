@@ -63,3 +63,30 @@
     border-radius: 50px;
     margin-top: 10px;
 }
+
+/*router*/
+.link {
+    background: lightgray;
+    margin-bottom: 20px;
+    padding: 4px 8px;
+}
+
+.link > a {
+    text-decoration: none;
+    margin: 4px 8px;
+}
+
+.link > a:hover {
+    color: white;
+}
+
+.link > a.active {
+    border-bottom: 2px solid darkgray;
+    color: white;
+}
+
+.detail {
+    background: lightblue;
+    padding: 8px;
+    margin-bottom: 8px;
+}
